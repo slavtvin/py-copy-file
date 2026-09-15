@@ -1,6 +1,6 @@
 def copy_file(command: str) -> None:
-    parts = command.split(" ")
-    if len(parts) < 3 or parts[0] != "cp":
+    parts = command.split()
+    if len(parts) != 3 or parts[0] != "cp":
         return
 
     first_filename = parts[1]
@@ -9,6 +9,6 @@ def copy_file(command: str) -> None:
     if first_filename == last_filename:
         return
 
-    with (open(first_filename, "r") as file_read,
-          open(last_filename, "w") as file_write):
-        file_write.write(file_read.read())
+    with (open(first_filename, "r") as source_file,
+          open(last_filename, "w") as destination_file):
+        destination_file.write(source_file.read())
